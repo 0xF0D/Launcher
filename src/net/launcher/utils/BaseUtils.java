@@ -36,6 +36,9 @@ import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.net.SocketException;
 import java.net.UnknownHostException;
+import java.util.Collections;
+import java.util.Enumeration;
+import java.util.Vector;
 
 public class BaseUtils
 {
@@ -158,18 +161,25 @@ public class BaseUtils
         
         public static String getMACAdress() throws UnknownHostException, SocketException 
         {
-                InetAddress ip;
+            ArrayList<NetworkInterface> interfaces = Collections.list(NetworkInterface.getNetworkInterfaces());
             
-		ip = InetAddress.getLocalHost();
-		NetworkInterface network = NetworkInterface.getByInetAddress(ip);
-			
-		byte[] mac = network.getHardwareAddress();
-			
-		StringBuilder sb = new StringBuilder();
-		for (int i = 0; i < mac.length; i++) {
-			sb.append(String.format("%02X%s", mac[i], (i < mac.length - 1) ? "-" : ""));		
-		}
-		return sb.toString();
+            byte[] mac=null;
+                    
+            for( int i=0; i<interfaces.size(); i++ ) {
+                mac = interfaces.get(i).getHardwareAddress();
+                if (mac.length != 0)
+                    break;
+            }
+            
+            if (mac == null)
+                System.out.println("WTF? Out of Internet?");
+            
+            String macaddr="";
+            for (int i = 0; i < mac.length; i++) {
+                macaddr += String.format("%02X%s", mac[i], (i < mac.length - 1) ? "-" : "");			
+            }                
+                
+            return macaddr;
         }
 
 	public static String buildUrl(String s)
