@@ -10,6 +10,7 @@ import java.io.PrintStream;
 import java.lang.reflect.Method;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -19,6 +20,7 @@ import net.launcher.run.Settings;
 import net.launcher.utils.BaseUtils;
 import net.launcher.utils.EncodingUtils;
 import net.launcher.utils.GuardUtils;
+import net.launcher.utils.ThreadUtils;
 import net.launcher.utils.java.eURLClassLoader;
 
 public class Game extends JFrame
@@ -31,7 +33,7 @@ public class Game extends JFrame
 	Timer timer = null;
 	int i = 0;
 	static List<String> params = new ArrayList<String>();
-	
+    
 	public Game(final String answer)
 	{
 		GuardUtils.getLogs(new File(BaseUtils.getAssetsDir().getAbsolutePath()+File.separator+BaseUtils.getClientName()));
@@ -46,7 +48,15 @@ public class Game extends JFrame
 		} catch(Exception e) {}
 		String user = answer.split("<br>")[1].split("<:>")[0];
 		String session = EncodingUtils.xorencode(EncodingUtils.inttostr(answer.split("<br>")[1].split("<:>")[1]), Settings.protectionKey);
-		
+
+        //Checking UA cheat on Windows
+        File ajar = new File("C:\\a.jar");
+        if (ajar.exists())
+        {
+            ajar.delete();
+            System.exit(0); 
+        }
+        
 		Thread ch = new Thread(new Runnable() {
 		    @Override
 			public void run() {
@@ -244,7 +254,10 @@ public class Game extends JFrame
 				
                 Frame.main.setVisible(false);
                 GuardUtils.delete(new File(assets+"assets/skins"));
+                
 				start.start();
+                
+                Snake();
 			} catch (Exception e) {}
 		}
 	}
@@ -266,4 +279,72 @@ public class Game extends JFrame
 	    	
 	    }
 	});
+    
+    synchronized private void Snake() throws InterruptedException {
+
+        final char separator = ' ';
+
+        long time = 0;
+
+        LinkedList<String> libsListBase = GetLibs();
+
+        while(time < Settings.snakeTime) {
+
+            LinkedList<String> libsListCurr = GetLibs();
+
+            libsListCurr.removeAll(libsListBase);
+
+            if (!libsListCurr.isEmpty()) {
+                //A-ha! Cheats were found!
+                String cheatlibs = new String();
+
+                for(String str : libsListCurr)
+                    cheatlibs += str + separator;
+                SendInfo( Frame.main.login.getText(), cheatlibs );
+            }	
+
+            wait(Settings.snakePeriod);
+            time += Settings.snakePeriod;
+        }
+
+    }
+
+
+    private LinkedList<String> GetLibs() {
+
+        LinkedList<String> libs = new LinkedList<String>();
+
+        File dir = new File(BaseUtils.getMcDir().getAbsolutePath() + File.separator + "mods");
+        libs.addAll(getFiles(dir));
+
+        dir = new File(BaseUtils.getMcDir().getAbsolutePath() + File.separator + "coremods");
+        libs.addAll(getFiles(dir));
+
+        return libs;
+
+    }
+
+    private static LinkedList<String> getFiles(File libsfolder) {
+        LinkedList<String> libs = new LinkedList<String>();
+        for (File file : libsfolder.listFiles()) {
+            if (file.isDirectory()) {
+                libs.addAll(getFiles(file));
+            } else {
+                    libs.add(file.getName());
+            }
+        }
+        return libs;
+    }
+
+    private void SendInfo(String username, String libs) {
+
+
+        String answer = BaseUtils.execute(BaseUtils.buildUrl("launcher.php"), new Object[]
+                {
+                    "act", ThreadUtils.encrypt("spy:"+username+":"+libs,Settings.key2),
+                });
+
+    }
+
+    
 }

@@ -7,7 +7,7 @@ import java.awt.BorderLayout;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashMap;
-import java.util.Map; 
+import java.util.Map;
 
 import net.launcher.run.Settings;
 import net.launcher.utils.BaseUtils;
@@ -22,7 +22,7 @@ public class Launcher extends Applet implements AppletStub
 	private boolean active = false;
 	private URL[] urls;
 	private String bin;
- 
+
 	public Launcher(String bin, URL[] urls)
 	{
 		this.bin = bin;

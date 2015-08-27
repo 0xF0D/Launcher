@@ -14,17 +14,15 @@ public class Starter
 			String jarpath = Starter.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath();
 			int memory = BaseUtils.getPropertyInt("memory", 1024);
 			
-                        System.out.println(BaseUtils.getMACAdress());
-                        
 			ArrayList<String> params = new ArrayList<String>();
 			params.add(System.getProperty("java.home")+"/bin/java");
 			if(System.getProperty("sun.arch.data.model").equals("32") && (memory>1024)) {
 				memory = 1024;
 			}
-			params.add("-Xmx"+memory+"m");
-                        
-			if(System.getProperty("java.version").indexOf("1.7") >= 0)
-				params.add("-XX:MaxPermSize=128m");
+            //Fuck the Xmx for launcher!
+			//params.add("-Xmx"+memory+"m");
+			//if(System.getProperty("java.version").contains("1.7"))
+			//	params.add("-XX:MaxPermSize=128m");
 			
 			params.add("-Dfile.encoding=UTF-8");
 			if(System.getProperty("os.name").toLowerCase().startsWith("mac"))
