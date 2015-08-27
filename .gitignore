@@ -42,6 +42,6 @@ Network Trash Folder
 Temporary Items
 .apdisk
 *.class
-*.png
+#*.png
 src/net/launcher/run/Settings.java
 *.jar
