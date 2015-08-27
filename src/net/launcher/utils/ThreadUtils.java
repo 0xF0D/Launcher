@@ -731,7 +731,7 @@ public class ThreadUtils
 		
 	}
 	
-	static String encrypt(String input, String key){
+	public static String encrypt(String input, String key){
 		  byte[] crypted = null;
 		  try{
 		    SecretKeySpec skey = new SecretKeySpec(key.getBytes(), "AES");
@@ -744,7 +744,7 @@ public class ThreadUtils
 		    return new String(new sun.misc.BASE64Encoder().encode(crypted));
 		}
 
-    static String decrypt(String input, String key){
+    public static String decrypt(String input, String key){
 		    byte[] output = null;
 		    try{
 		      SecretKeySpec skey = new SecretKeySpec(key.getBytes(), "AES");
