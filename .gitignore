@@ -45,3 +45,4 @@ Temporary Items
 #*.png
 src/net/launcher/run/Settings.java
 *.jar
+*.log
