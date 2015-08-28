@@ -46,3 +46,5 @@ Temporary Items
 src/net/launcher/run/Settings.java
 *.jar
 *.log
+build/classes/.netbeans_update_resources
+build/classes/.netbeans_automatic_build
