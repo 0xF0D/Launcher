@@ -165,14 +165,16 @@ public class BaseUtils
             
             byte[] mac=null;
                     
-            for( int i=0; i<interfaces.size(); i++ ) {
+            for( int i=1; i<interfaces.size(); i++ ) {
                 mac = interfaces.get(i).getHardwareAddress();
-                if (mac.length != 0)
+                if (mac != null)
                     break;
             }
             
-            if (mac == null)
+            if (mac == null) {
                 System.out.println("WTF? Out of Internet?");
+                return "";
+            }
             
             String macaddr="";
             for (int i = 0; i < mac.length; i++) {
