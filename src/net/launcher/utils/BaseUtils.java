@@ -165,7 +165,7 @@ public class BaseUtils
             
             byte[] mac=null;
                     
-            for( int i=1; i<interfaces.size(); i++ ) {
+            for( int i=0; i<interfaces.size(); i++ ) {
                 mac = interfaces.get(i).getHardwareAddress();
                 if (mac != null)
                     break;
