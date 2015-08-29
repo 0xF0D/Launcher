@@ -21,8 +21,8 @@ public class Starter
 			}
             //Fuck the Xmx for launcher!
 			//params.add("-Xmx"+memory+"m");
-			//if(System.getProperty("java.version").contains("1.7"))
-			//	params.add("-XX:MaxPermSize=128m");
+			if(System.getProperty("java.version").contains("1.7"))
+				params.add("-XX:MaxPermSize=256m");
 			
 			params.add("-Dfile.encoding=UTF-8");
 			if(System.getProperty("os.name").toLowerCase().startsWith("mac"))
