@@ -66,7 +66,10 @@ public class ThreadUtils
                         
 			String answer2 = BaseUtils.execute(BaseUtils.buildUrl("launcher.php"), new Object[]
 			{
-				"action", encrypt("auth:"+BaseUtils.getClientName()+":"+Frame.login.getText()+":"+token+":"+GuardUtils.hash(ThreadUtils.class.getProtectionDomain().getCodeSource().getLocation().toURI().toURL())+":"+Frame.token+":"+BaseUtils.getPlatform()+":"+BaseUtils.getMACAdress(), Settings.key2),
+				"action", encrypt("auth:"+BaseUtils.getClientName()+":"+Frame.login.getText()+":"+token+":"
+                                        +GuardUtils.hash(ThreadUtils.class.getProtectionDomain().getCodeSource().getLocation().toURI().toURL())
+                                        +":"+Frame.token+":"+BaseUtils.getPlatform()
+                                        +":"+BaseUtils.getMACAdress()+":"+Settings.adminClient, Settings.key2),
 			});
 			BaseUtils.send(answer2);
             String answer = null;
