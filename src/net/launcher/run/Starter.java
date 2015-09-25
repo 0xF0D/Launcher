@@ -20,7 +20,7 @@ public class Starter
 				memory = 1024;
 			}
             //Fuck the Xmx for launcher!
-			//params.add("-Xmx"+memory+"m");
+			params.add("-Xmx"+memory+"m");
 			if(System.getProperty("java.version").contains("1.7"))
 				params.add("-XX:MaxPermSize=256m");
 			

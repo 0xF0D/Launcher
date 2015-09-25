@@ -50,8 +50,8 @@ public class UpdaterThread extends Thread
 		for (int i = 0; i < files.size(); i++)
 		{
 			currentfile = files.get(i);         
-                        if((currentfile.contains("Opis") || currentfile.contains("MobiusCore")) && !Settings.adminClient)
-                            continue;
+                        //if((currentfile.contains("Opis") || currentfile.contains("MobiusCore")) && !Settings.adminClient)
+                        //    continue;
                         
 			String file = currentfile.replace(" ", "%20");
 			BaseUtils.send("Downloading file: " + currentfile);

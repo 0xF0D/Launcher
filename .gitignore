@@ -50,3 +50,4 @@ src/net/launcher/run/Settings.java
 *.txt
 build/classes/.netbeans_update_resources
 build/classes/.netbeans_automatic_build
+/dist/
