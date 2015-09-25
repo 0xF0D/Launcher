@@ -19,7 +19,7 @@ public class Starter
 			if(System.getProperty("sun.arch.data.model").equals("32") && (memory>1024)) {
 				memory = 1024;
 			}
-            //Fuck the Xmx for launcher!
+            
 			params.add("-Xmx"+memory+"m");
 			if(System.getProperty("java.version").contains("1.7"))
 				params.add("-XX:MaxPermSize=256m");
