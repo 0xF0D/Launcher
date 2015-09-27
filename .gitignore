@@ -51,3 +51,6 @@ src/net/launcher/run/Settings.java
 build/classes/.netbeans_update_resources
 build/classes/.netbeans_automatic_build
 /dist/
+build/built-jar.properties
+nbproject/private/private.properties
+nbproject/private/private.xml
